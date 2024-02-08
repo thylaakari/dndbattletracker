@@ -84,6 +84,7 @@ export default {
 		async checkHero() {
 			const { valid } = await this.$refs.addHero.validate()
 			if (valid) {
+				this.hero.currentHp = this.hero.hp
 				this.addHeroID(this.hero)
 				this.hero = {}
 			}

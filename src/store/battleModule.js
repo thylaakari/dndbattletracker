@@ -2,14 +2,24 @@ export const battleModule = {
 	state: () => ({
 		round: 0,
 		turn: 0,
-		timeElapsed: '',
-		start: true,
+		timeElapsed: {
+			min: 0,
+			sec: 0,
+		},
+		start: false,
 		heroesCount: 0,
 		countTurnInRound: 0,
 		heroesNames: [],
 		turnHeroName: '',
 	}),
-	getters: {},
+	getters: {
+		getTime(state) {
+			return state.timeElapsed
+		},
+		getRound(state) {
+			return state.round
+		},
+	},
 	mutations: {
 		setStart(state, bool) {
 			state.start = bool
@@ -35,7 +45,7 @@ export const battleModule = {
 	},
 	actions: {
 		startBattle({ commit, rootGetters, dispatch }) {
-			// чей ход
+			if (rootGetters['heroes/getCountHeroes'] === 0) return
 			commit('setStart', true)
 			commit('setCountTurnInRound', rootGetters['heroes/getCountHeroes'])
 			commit('setHeroesNames', rootGetters['heroes/getHeroesNames'])
@@ -44,6 +54,7 @@ export const battleModule = {
 		round({ commit, state, dispatch }) {
 			commit('setRound', state.round + 1)
 			dispatch('turn')
+			dispatch('checkTime')
 		},
 		turn({ commit, state, dispatch }) {
 			commit('setTurnHeroName', state.turn)
@@ -51,6 +62,27 @@ export const battleModule = {
 			if (state.turn > state.countTurnInRound) {
 				commit('setTurn', 0)
 				dispatch('round')
+			}
+		},
+		checkTime({ commit, getters }) {
+			if (getters.getRound === 1) {
+				commit('setTime', {
+					min: 0,
+					sec: 0,
+				})
+			} else {
+				if (getters.getTime.sec === 54) {
+					console.log(getters.getTime.sec)
+					commit('setTime', {
+						min: getters.getTime.min + 1,
+						sec: 0,
+					})
+				} else {
+					commit('setTime', {
+						min: getters.getTime.min,
+						sec: (getters.getTime.sec += 6),
+					})
+				}
 			}
 		},
 		endBattle({ commit }) {

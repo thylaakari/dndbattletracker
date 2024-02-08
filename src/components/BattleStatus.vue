@@ -12,7 +12,11 @@
 			<v-chip class="mx-3"
 				>Раунд: {{ round }} / Ход: {{ turn }} из {{ countTurnInRound }}</v-chip
 			>
-			<v-chip class="mx-3">Времени прошло: 00:00</v-chip>
+			<v-chip class="mx-3"
+				>Времени прошло: {{ min < 10 ? '0' + min : min }}:{{
+					sec < 10 ? '0' + sec : sec
+				}}</v-chip
+			>
 			<v-btn
 				prepend-icon="mdi-arrow-right"
 				@click="nextTurn()"
@@ -46,6 +50,8 @@ export default {
 			countTurnInRound: state => state.battle.countTurnInRound,
 			turn: state => state.battle.turn,
 			turnHeroName: state => state.battle.turnHeroName,
+			min: state => state.battle.timeElapsed.min,
+			sec: state => state.battle.timeElapsed.sec,
 		}),
 	},
 }
