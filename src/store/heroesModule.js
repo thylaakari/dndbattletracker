@@ -38,8 +38,16 @@ export const heroesModule = {
 				currentHp: 18,
 				status: [],
 			},
+			{
+				id: 4,
+				name: 'Guard',
+				initiative: 18,
+				hp: 18,
+				ac: 16,
+				currentHp: 18,
+				status: [],
+			},
 		],
-		repeateNames: 0,
 	}),
 	getters: {
 		getHeroes(state) {
@@ -54,6 +62,9 @@ export const heroesModule = {
 		getHeroesNames(state, getters) {
 			return getters.sortedByInitiative.map(h => h.name)
 		},
+		getHeroesID(state, getters) {
+			return getters.sortedByInitiative.map(h => h.id)
+		},
 	},
 	mutations: {
 		saveHero(state, hero) {
@@ -67,7 +78,7 @@ export const heroesModule = {
 		},
 	},
 	actions: {
-		addHeroID({ getters, commit, dispatch }, hero) {
+		addHeroID({ getters, commit }, hero) {
 			hero.id = getters.getCountHeroes
 			commit('saveHero', hero)
 		},

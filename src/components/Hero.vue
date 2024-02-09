@@ -1,7 +1,7 @@
 <template>
 	<v-card
 		:color="
-			heroName === hero.name ? 'light-green-lighten-4' : 'blue-grey-lighten-5'
+			heroID === hero.id ? 'light-green-lighten-4' : 'blue-grey-lighten-5'
 		"
 	>
 		<v-card-title class="d-flex flex-wrap"
@@ -80,7 +80,7 @@ export default {
 	},
 	computed: {
 		...mapState({
-			heroName: state => state.battle.turnHeroName,
+			heroID: state => state.battle.turnHeroID,
 			isStarted: state => state.battle.start,
 		}),
 	},

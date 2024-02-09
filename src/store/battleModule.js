@@ -10,7 +10,9 @@ export const battleModule = {
 		heroesCount: 0,
 		countTurnInRound: 0,
 		heroesNames: [],
+		heroesID: [],
 		turnHeroName: '',
+		turnHeroID: undefined,
 	}),
 	getters: {
 		getTime(state) {
@@ -39,8 +41,19 @@ export const battleModule = {
 		setHeroesNames(state, names) {
 			state.heroesNames = names
 		},
+		setHeroesID(state, id) {
+			state.heroesID = id
+		},
 		setTurnHeroName(state, index) {
-			state.turnHeroName = state.heroesNames[index]
+			index === ''
+				? (state.turnHeroName = '')
+				: (state.turnHeroName = state.heroesNames[index])
+		},
+		setTurnHeroID(state, id) {
+			id === undefined
+				? (state.turnHeroID = undefined)
+				: (state.turnHeroID = state.heroesID[id])
+			console.log('id', state.turnHeroID)
 		},
 	},
 	actions: {
@@ -49,6 +62,7 @@ export const battleModule = {
 			commit('setStart', true)
 			commit('setCountTurnInRound', rootGetters['heroes/getCountHeroes'])
 			commit('setHeroesNames', rootGetters['heroes/getHeroesNames'])
+			commit('setHeroesID', rootGetters['heroes/getHeroesID'])
 			dispatch('round')
 		},
 		round({ commit, state, dispatch }) {
@@ -58,6 +72,7 @@ export const battleModule = {
 		},
 		turn({ commit, state, dispatch }) {
 			commit('setTurnHeroName', state.turn)
+			commit('setTurnHeroID', state.turn)
 			commit('setTurn', state.turn + 1)
 			if (state.turn > state.countTurnInRound) {
 				commit('setTurn', 0)
@@ -72,7 +87,6 @@ export const battleModule = {
 				})
 			} else {
 				if (getters.getTime.sec === 54) {
-					console.log(getters.getTime.sec)
 					commit('setTime', {
 						min: getters.getTime.min + 1,
 						sec: 0,
@@ -91,6 +105,8 @@ export const battleModule = {
 			commit('setRound', 0)
 			commit('setTurn', 0)
 			commit('setTime', '')
+			commit('setTurnHeroName', '')
+			commit('setTurnHeroID', undefined)
 		},
 	},
 	namespaced: true,
