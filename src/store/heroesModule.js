@@ -39,6 +39,7 @@ export const heroesModule = {
 				status: [],
 			},
 		],
+		repeateNames: 0,
 	}),
 	getters: {
 		getHeroes(state) {
@@ -66,7 +67,7 @@ export const heroesModule = {
 		},
 	},
 	actions: {
-		addHeroID({ getters, commit }, hero) {
+		addHeroID({ getters, commit, dispatch }, hero) {
 			hero.id = getters.getCountHeroes
 			commit('saveHero', hero)
 		},

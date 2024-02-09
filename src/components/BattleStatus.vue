@@ -1,18 +1,23 @@
 <template>
-	<v-app-bar color="teal">
-		<v-app-bar-title>Трекер боя ДнД</v-app-bar-title>
+	<v-card color="teal" class="d-flex">
+		<v-card-title class="d-none d-md-flex">Трекер боя ДнД</v-card-title>
 		<v-spacer></v-spacer>
 		<div v-if="!isStarted">
-			<v-btn prepend-icon="mdi-axe-battle" @click="startBattle()"
+			<v-btn
+				prepend-icon="mdi-axe-battle"
+				@click="startBattle()"
+				color="black"
+				variant="outlined"
+				class="ma-2"
 				>Начать бой</v-btn
 			>
 		</div>
-		<div v-else>
-			<v-chip class="mx-3">Ход: {{ turnHeroName }}</v-chip>
-			<v-chip class="mx-3"
+		<div v-else class="d-flex flex-wrap">
+			<v-chip class="ma-2">Ход: {{ turnHeroName }}</v-chip>
+			<v-chip class="ma-2"
 				>Раунд: {{ round }} / Ход: {{ turn }} из {{ countTurnInRound }}</v-chip
 			>
-			<v-chip class="mx-3"
+			<v-chip class="ma-2"
 				>Времени прошло: {{ min < 10 ? '0' + min : min }}:{{
 					sec < 10 ? '0' + sec : sec
 				}}</v-chip
@@ -21,16 +26,30 @@
 				prepend-icon="mdi-arrow-right"
 				@click="nextTurn()"
 				v-if="turn === countTurnInRound"
+				color="white"
+				variant="outlined"
+				class="ma-2"
 				>Следующий раунд</v-btn
 			>
-			<v-btn prepend-icon="mdi-arrow-right" @click="nextTurn()" v-else
+			<v-btn
+				prepend-icon="mdi-arrow-right"
+				@click="nextTurn()"
+				v-else
+				color="white"
+				variant="outlined"
+				class="ma-2"
 				>Следующий ход</v-btn
 			>
-			<v-btn prepend-icon="mdi-close" color="black" @click="endBattle()"
+			<v-btn
+				prepend-icon="mdi-close"
+				color="black"
+				@click="endBattle()"
+				variant="outlined"
+				class="ma-2"
 				>Закончить бой</v-btn
 			>
 		</div>
-	</v-app-bar>
+	</v-card>
 </template>
 <script>
 import { mapActions, mapState } from 'vuex'
