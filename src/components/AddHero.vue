@@ -85,6 +85,73 @@ export default {
 			const { valid } = await this.$refs.addHero.validate()
 			if (valid) {
 				this.hero.currentHp = this.hero.hp
+				this.hero.status = [
+					{
+						name: 'Умер',
+						color: 'black',
+						active: false,
+					},
+					{
+						name: 'Бессознательный',
+						color: 'red',
+						active: false,
+					},
+					{
+						name: 'Испуганный',
+						color: 'purple',
+						active: false,
+					},
+					{
+						name: 'Истощенный',
+						color: 'deep-purple',
+						active: false,
+					},
+					{
+						name: 'Окаменевший',
+						color: 'pink',
+						active: false,
+					},
+					{
+						name: 'Опутанный',
+						color: 'indigo',
+						active: false,
+					},
+					{
+						name: 'Ослепленный',
+						color: 'blue',
+						active: false,
+					},
+					{
+						name: 'Отравленный',
+						color: 'light-blue',
+						active: false,
+					},
+					{
+						name: 'Очарованный',
+						color: 'cyan',
+						active: false,
+					},
+					{
+						name: 'Ошеломленный',
+						color: 'teal',
+						active: false,
+					},
+					{
+						name: 'Парализованный',
+						color: 'green',
+						active: false,
+					},
+					{
+						name: 'Сбитый с ног',
+						color: 'light-green',
+						active: false,
+					},
+					{
+						name: 'Схваченный',
+						color: 'lime',
+						active: false,
+					},
+				]
 				this.addHeroID(this.hero)
 				this.hero = {}
 			}

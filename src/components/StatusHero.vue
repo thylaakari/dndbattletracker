@@ -3,8 +3,8 @@
 		rounded="xl"
 		class="ma-1"
 		size="x-small"
-		:color="status.active ? status.color : 'grey'"
-		@click="status.active = !status.active"
+		:color="setColor"
+		@click="changeStatus()"
 		>{{ status.name }}</v-btn
 	>
 </template>
@@ -15,6 +15,20 @@ export default {
 		status: {
 			type: Object,
 			required: true,
+		},
+		active: {
+			type: Boolean,
+		},
+	},
+	methods: {
+		changeStatus() {
+			this.$emit('changeStatus', this.status.name, this.active)
+		},
+	},
+	computed: {
+		setColor() {
+			if (this.active) return this.status.color
+			else return 'grey'
 		},
 	},
 }

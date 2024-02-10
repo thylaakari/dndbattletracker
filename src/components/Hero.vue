@@ -1,27 +1,23 @@
 <template>
-	<v-card
-		:color="
-			heroID === hero.id ? 'light-green-lighten-4' : 'blue-grey-lighten-5'
-		"
-	>
+	<v-card :color="color">
 		<v-card-title class="d-flex flex-wrap"
-			>{{ hero.name }}
+			><span class="ma-1">{{ hero.name }}</span>
 			<v-chip
-				class="mx-2"
+				class="ma-1"
 				prepend-icon="mdi-heart-outline"
 				variant="outlined"
 				color="pink"
 				>{{ hero.currentHp }} / {{ hero.hp }}</v-chip
 			>
 			<v-chip
-				class="mx-2"
+				class="ma-1"
 				prepend-icon="mdi-dice-multiple-outline"
 				variant="outlined"
 				color="blue"
 				>{{ hero.initiative }}</v-chip
 			>
 			<v-chip
-				class="mx-2"
+				class="ma-1"
 				prepend-icon="mdi-shield-outline"
 				variant="outlined"
 				color="deep-orange"
@@ -36,6 +32,7 @@
 						v-model.number="newHp"
 						:rules="numberRules"
 						variant="underlined"
+						hide-details
 						append-inner-icon="mdi-plus"
 						prepend-inner-icon="mdi-minus"
 						@click:append-inner="checkHpBar('+')"
@@ -43,13 +40,23 @@
 					></v-text-field>
 				</v-form>
 			</v-card-subtitle>
-			<status-list></status-list>
+			<status-list
+				@changeStatus="changeStatus"
+				:hero="hero"
+				:active="true"
+			></status-list>
+			<v-divider class="mx-4 mb-1"></v-divider>
+			<status-list
+				@changeStatus="changeStatus"
+				:hero="hero"
+				:active="false"
+			></status-list>
 		</div>
 	</v-card>
 </template>
 <script>
 import StatusList from '@/components/StatusList'
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapMutations, mapState } from 'vuex'
 export default {
 	name: 'Hero',
 	components: {
@@ -63,7 +70,7 @@ export default {
 	},
 	data() {
 		return {
-			newHp: '',
+			newHp: undefined,
 			numberRules: [v => (v > 0 ? true : 'Введите число > 0')],
 		}
 	},
@@ -71,10 +78,17 @@ export default {
 		...mapActions({
 			changeHp: 'heroes/changeHp',
 		}),
+		...mapMutations({
+			setStatus: 'heroes/setStatus',
+		}),
+		changeStatus(name, active) {
+			this.setStatus({ id: this.hero.id, name: name, active: active })
+		},
 		async checkHpBar(sign) {
 			const { valid } = await this.$refs.hpBar.validate()
 			if (valid) {
 				this.changeHp({ sign: sign, newHp: this.newHp, id: this.hero.id })
+				this.newHp = undefined
 			}
 		},
 	},
@@ -83,6 +97,11 @@ export default {
 			heroID: state => state.battle.turnHeroID,
 			isStarted: state => state.battle.start,
 		}),
+		color() {
+			if (this.heroID === this.hero.id) return 'green-lighten-4'
+			if (this.hero.currentHp < 1) return 'deep-orange-lighten-4'
+			return 'blue-grey-lighten-5'
+		},
 	},
 }
 </script>

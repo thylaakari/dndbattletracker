@@ -53,7 +53,6 @@ export const battleModule = {
 			id === undefined
 				? (state.turnHeroID = undefined)
 				: (state.turnHeroID = state.heroesID[id])
-			console.log('id', state.turnHeroID)
 		},
 	},
 	actions: {
