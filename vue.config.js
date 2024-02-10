@@ -11,5 +11,5 @@ module.exports = defineConfig({
 			return definitions
 		})
 	},
-	publicPath: '/dndbattletracker/',
+	// publicPath: '/dndbattletracker/',
 })
