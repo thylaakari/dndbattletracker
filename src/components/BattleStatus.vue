@@ -1,12 +1,12 @@
 <template>
-	<v-card color="teal" class="d-flex">
+	<v-card class="d-flex rounded-0 app-bar">
 		<v-card-title class="d-none d-md-flex">Трекер боя ДнД</v-card-title>
 		<v-spacer></v-spacer>
 		<div v-if="!isStarted">
 			<v-btn
 				prepend-icon="mdi-axe-battle"
 				@click="startBattle()"
-				color="black"
+				color="#9d0a0e"
 				variant="outlined"
 				class="ma-2"
 				>Начать бой</v-btn
@@ -26,7 +26,7 @@
 				prepend-icon="mdi-arrow-right"
 				@click="nextTurn()"
 				v-if="turn === countTurnInRound"
-				color="white"
+				color="#9d0a0e"
 				variant="outlined"
 				class="ma-2"
 				>Следующий раунд</v-btn
@@ -35,16 +35,15 @@
 				prepend-icon="mdi-arrow-right"
 				@click="nextTurn()"
 				v-else
-				color="white"
+				color="#9d0a0e"
 				variant="outlined"
 				class="ma-2"
 				>Следующий ход</v-btn
 			>
 			<v-btn
 				prepend-icon="mdi-close"
-				color="black"
+				color="#9d0a0e"
 				@click="endBattle()"
-				variant="outlined"
 				class="ma-2"
 				>Закончить бой</v-btn
 			>
@@ -75,3 +74,9 @@ export default {
 	},
 }
 </script>
+<style scoped>
+.app-bar {
+	background-color: #e7e7db;
+	border-bottom: 4px solid #9d0a0e;
+}
+</style>

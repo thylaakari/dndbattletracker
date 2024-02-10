@@ -1,11 +1,11 @@
 <template>
 	<v-app>
 		<battle-status></battle-status>
-		<v-main>
+		<v-main class="main">
 			<add-hero></add-hero>
 			<hero-list></hero-list>
 		</v-main>
-		<v-footer border class="bg-grey-lighten-5" app>
+		<v-footer border class="bg-grey-lighten-5 d-flex flex-wrap" app>
 			<v-btn variant="plain" disabled>{{ new Date().getFullYear() }}</v-btn>
 			<v-btn variant="plain" disabled>Lev Vorobyov</v-btn>
 			<v-btn variant="text" href="https://vk.com/lev2die" target="_blank"
@@ -32,4 +32,10 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.main {
+	background: #ebebe6
+		url('https://images.ctfassets.net/swt2dsco9mfe/1tr6dUNuH2vNfUWXtUGnSh/991457a16f93c5df49cf32e1d343bde9/bg-media-gallery.jpg?q=70&w=1920&h=754&fit=crop&f=center&fm=avif')
+		no-repeat center center;
+}
+</style>

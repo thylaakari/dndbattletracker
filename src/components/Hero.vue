@@ -1,5 +1,5 @@
 <template>
-	<v-card :color="color">
+	<v-card :class="class">
 		<v-card-title class="d-flex flex-wrap"
 			><span class="ma-1">{{ hero.name }}</span>
 			<v-chip
@@ -97,11 +97,25 @@ export default {
 			heroID: state => state.battle.turnHeroID,
 			isStarted: state => state.battle.start,
 		}),
-		color() {
-			if (this.heroID === this.hero.id) return 'green-lighten-4'
-			if (this.hero.currentHp < 1) return 'deep-orange-lighten-4'
-			return 'blue-grey-lighten-5'
+		class() {
+			if (this.heroID === this.hero.id) return 'hero-card-active'
+			if (this.hero.currentHp < 1) return 'hero-card-dead'
+			return 'hero-card'
 		},
 	},
 }
 </script>
+<style scoped>
+.hero-card-active {
+	border: 1px solid #9d0a0e;
+	background-color: #ebe1ad;
+}
+.hero-card {
+	border: 1px solid grey;
+	background-color: #e7e7db;
+}
+.hero-card-dead {
+	border: 1px solid #9d0a0e;
+	background-color: #e0e0e0;
+}
+</style>

@@ -1,10 +1,10 @@
 <template>
 	<v-container v-if="!isStarted">
-		<v-card color="teal-darken-4">
+		<v-card class="add-to-battle">
 			<v-card-title>Добавить в бой</v-card-title>
 			<v-form @submit.prevent ref="addHero">
 				<v-container>
-					<v-row>
+					<v-row class="align-center">
 						<v-col cols="12" md="3">
 							<v-text-field
 								variant="outlined"
@@ -51,11 +51,12 @@
 
 						<v-col cols="12" md="3">
 							<v-btn
-								size="large"
-								icon="mdi-plus"
-								color="teal"
+								size="x-large"
+								prepend-icon="mdi-plus"
+								variant="outlined"
 								@click="checkHero(hero)"
-							></v-btn>
+								>Добавить</v-btn
+							>
 						</v-col>
 					</v-row>
 				</v-container>
@@ -74,8 +75,8 @@ export default {
 			hp: '',
 			ac: '',
 		},
-		textRules: [v => (v ? true : 'Введите имя')],
-		numberRules: [v => (v > 0 ? true : 'Введите число > 0')],
+		textRules: [v => v.length > 0 || false],
+		numberRules: [v => v > 0 || false],
 	}),
 	methods: {
 		...mapActions({
@@ -164,3 +165,10 @@ export default {
 	},
 }
 </script>
+<style scoped>
+.add-to-battle {
+	color: #9d0a0e;
+	background-color: #e7e7db;
+	border: 1px solid #9d0a0e;
+}
+</style>
