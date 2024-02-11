@@ -1,4 +1,4 @@
-Сайт - https://willowy-bombolone-827e35.netlify.app/
+Сайт - https://dndbattle.netlify.app/
 
 # Русский трекер боя ДнД
 ## Обновление v 1.5
