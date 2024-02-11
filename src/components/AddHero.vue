@@ -12,7 +12,6 @@
 								v-model="hero.name"
 								required
 								hide-details
-								:rules="textRules"
 							></v-text-field>
 						</v-col>
 
@@ -24,6 +23,9 @@
 								required
 								hide-details
 								:rules="numberRules"
+								append-inner-icon="mdi-dice-5-outline"
+								@click:append-inner="getDice(1, 20)"
+								type="number"
 							></v-text-field>
 						</v-col>
 
@@ -35,6 +37,7 @@
 								required
 								hide-details
 								:rules="numberRules"
+								type="number"
 							></v-text-field>
 						</v-col>
 
@@ -46,6 +49,7 @@
 								required
 								hide-details
 								:rules="numberRules"
+								type="number"
 							></v-text-field>
 						</v-col>
 
@@ -65,6 +69,7 @@
 	</v-container>
 </template>
 <script>
+import shared from '@/components/shared'
 import { mapActions, mapState } from 'vuex'
 export default {
 	name: 'AddHero',
@@ -75,7 +80,6 @@ export default {
 			hp: '',
 			ac: '',
 		},
-		textRules: [v => v.length > 0 || false],
 		numberRules: [v => v > 0 || false],
 	}),
 	methods: {
@@ -156,6 +160,9 @@ export default {
 				this.addHeroID(this.hero)
 				this.hero = {}
 			}
+		},
+		getDice(countDices, dice) {
+			this.hero.initiative = shared.dice(countDices, dice)
 		},
 	},
 	computed: {

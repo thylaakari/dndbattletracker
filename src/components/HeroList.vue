@@ -1,9 +1,11 @@
 <template>
 	<v-container fluid>
 		<v-row>
-			<v-col cols="12" md="3" v-for="hero in heroes">
-				<hero :hero="hero"></hero>
-			</v-col>
+			<transition-group name="flip-list">
+				<v-col cols="12" md="3" v-for="hero in heroes" :key="hero.id">
+					<hero :hero="hero"></hero>
+				</v-col>
+			</transition-group>
 		</v-row>
 	</v-container>
 </template>
@@ -22,3 +24,8 @@ export default {
 	},
 }
 </script>
+<style scoped>
+.flip-list-move {
+	transition: transform 0.8s ease;
+}
+</style>

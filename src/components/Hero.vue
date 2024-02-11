@@ -27,18 +27,15 @@
 		<div v-if="isStarted === true">
 			<v-divider class="mx-4 mb-1"></v-divider>
 			<v-card-subtitle>
-				<v-form ref="hpBar">
-					<v-text-field
-						v-model.number="newHp"
-						:rules="numberRules"
-						variant="underlined"
-						hide-details
-						append-inner-icon="mdi-plus"
-						prepend-inner-icon="mdi-minus"
-						@click:append-inner="checkHpBar('+')"
-						@click:prepend-inner="checkHpBar('-')"
-					></v-text-field>
-				</v-form>
+				<v-text-field
+					v-model="newHp"
+					variant="underlined"
+					hide-details
+					append-inner-icon="mdi-plus"
+					prepend-inner-icon="mdi-minus"
+					@click:append-inner="checkHpBar('+')"
+					@click:prepend-inner="checkHpBar('-')"
+				></v-text-field>
 			</v-card-subtitle>
 			<status-list
 				@changeStatus="changeStatus"
@@ -70,26 +67,37 @@ export default {
 	},
 	data() {
 		return {
-			newHp: undefined,
-			numberRules: [v => (v > 0 ? true : 'Введите число > 0')],
+			newHp: '',
 		}
 	},
 	methods: {
 		...mapActions({
 			changeHp: 'heroes/changeHp',
+			setHp: 'heroes/setHp',
 		}),
 		...mapMutations({
 			setStatus: 'heroes/setStatus',
+			setExactStatus: 'heroes/setExactStatus',
 		}),
 		changeStatus(name, active) {
 			this.setStatus({ id: this.hero.id, name: name, active: active })
 		},
-		async checkHpBar(sign) {
-			const { valid } = await this.$refs.hpBar.validate()
-			if (valid) {
-				this.changeHp({ sign: sign, newHp: this.newHp, id: this.hero.id })
-				this.newHp = undefined
-			}
+		changeExactStatus(name, active) {
+			this.setExactStatus({ id: this.hero.id, name: name, active: active })
+		},
+		checkHpBar(sign) {
+			if (Number.isInteger(+this.newHp) || this.newHp === '') {
+				let hp
+				this.newHp === '' ? (hp = 1) : (hp = +this.newHp)
+				this.changeHp({ sign: sign, newHp: hp, id: this.hero.id })
+				if (this.hero.currentHp < 1) {
+					this.changeExactStatus('Умер', true)
+					this.setHp({ id: this.hero.id, hp: 0 })
+				} else {
+					this.changeExactStatus('Умер', false)
+				}
+				this.newHp = ''
+			} else return
 		},
 	},
 	computed: {
@@ -99,8 +107,11 @@ export default {
 		}),
 		class() {
 			if (this.heroID === this.hero.id) return 'hero-card-active'
-			if (this.hero.currentHp < 1) return 'hero-card-dead'
-			return 'hero-card'
+			if (this.hero.currentHp < 1) {
+				return 'hero-card-dead'
+			} else {
+				return 'hero-card'
+			}
 		},
 	},
 }

@@ -5,8 +5,9 @@
 		size="x-small"
 		:color="setColor"
 		@click="changeStatus()"
-		>{{ status.name }}</v-btn
-	>
+		>{{ status.name }}
+		<!-- <span v-if="status.time">- {{ status.time }}</span> -->
+	</v-btn>
 </template>
 <script>
 export default {

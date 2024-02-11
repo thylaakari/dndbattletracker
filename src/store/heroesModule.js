@@ -13,67 +13,80 @@ export const heroesModule = {
 					{
 						name: 'Умер',
 						color: 'black',
-						active: true,
+						active: false,
+						time: 0,
 					},
 					{
 						name: 'Бессознательный',
 						color: 'red',
 						active: false,
+						time: 0,
 					},
 					{
 						name: 'Испуганный',
 						color: 'purple',
 						active: false,
+						time: 0,
 					},
 					{
 						name: 'Истощенный',
 						color: 'deep-purple',
 						active: false,
+						time: 0,
 					},
 					{
 						name: 'Окаменевший',
 						color: 'pink',
 						active: false,
+						time: 0,
 					},
 					{
 						name: 'Опутанный',
 						color: 'indigo',
-						active: true,
+						active: false,
+						time: 0,
 					},
 					{
 						name: 'Ослепленный',
 						color: 'blue',
 						active: false,
+						time: 0,
 					},
 					{
 						name: 'Отравленный',
 						color: 'light-blue',
 						active: false,
+						time: 0,
 					},
 					{
 						name: 'Очарованный',
 						color: 'cyan',
 						active: false,
+						time: 0,
 					},
 					{
 						name: 'Ошеломленный',
 						color: 'teal',
 						active: false,
+						time: 0,
 					},
 					{
 						name: 'Парализованный',
 						color: 'green',
 						active: false,
+						time: 0,
 					},
 					{
 						name: 'Сбитый с ног',
 						color: 'light-green',
 						active: false,
+						time: 0,
 					},
 					{
 						name: 'Схваченный',
 						color: 'lime',
 						active: false,
+						time: 0,
 					},
 				],
 			},
@@ -413,9 +426,18 @@ export const heroesModule = {
 				? (hero.currentHp += data.newHp)
 				: (hero.currentHp -= data.newHp)
 		},
+		setExactHpByID(state, data) {
+			let hero = state.heroes.find(h => h.id === data.id)
+			hero.currentHp = data.hp
+		},
 		setStatus(state, status) {
 			let hero = state.heroes.find(h => h.id === status.id)
 			hero.status.find(s => s.name === status.name).active = !status.active
+			hero.status.find(s => s.name === status.name).time = '00:00'
+		},
+		setExactStatus(state, status) {
+			let hero = state.heroes.find(h => h.id === status.id)
+			hero.status.find(s => s.name === status.name).active = status.active
 		},
 	},
 	actions: {
@@ -425,6 +447,9 @@ export const heroesModule = {
 		},
 		changeHp({ commit }, payload) {
 			commit('setHpByID', payload)
+		},
+		setHp({ commit }, payload) {
+			commit('setExactHpByID', payload)
 		},
 	},
 	namespaced: true,
