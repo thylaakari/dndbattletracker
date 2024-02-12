@@ -411,7 +411,7 @@ export const heroesModule = {
         getHeroesID(state, getters) {
             return getters.sortedByInitiative.map(h => h.id)
         },
-        getHeroStatusesByActive: (_, getters) => (heroId, isActive) => getters.getHeroByID(heroId)?.status.filter(s => s.active === isActive)
+        getStatusHeroByActive: (_, getters) => (heroId, isActive) => getters.getHeroByID(heroId)?.status.filter(s => s.active === isActive)
     },
     mutations: {
         saveHero(state, hero) {
