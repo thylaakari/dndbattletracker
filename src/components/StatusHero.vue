@@ -6,10 +6,13 @@
 		:color="setColor"
 		@click="changeStatus()"
 		>{{ status.name }}
-		<!-- <span v-if="status.time">- {{ status.time }}</span> -->
+		 <span v-if="status.active">- {{getFormattedTime}}</span>
 	</v-btn>
 </template>
 <script>
+import {mapState} from "vuex";
+import shared from '@/components/shared'
+
 export default {
 	name: 'StatusHero',
 	props: {
@@ -27,10 +30,14 @@ export default {
 		},
 	},
 	computed: {
+    ...mapState({timeElapsed: state=>state.battle.timeElapsed}),
 		setColor() {
 			if (this.active) return this.status.color
 			else return 'grey'
 		},
+    getFormattedTime(){
+      return shared.formatTime(this.timeElapsed.min*60+this.timeElapsed.sec - this.status.effectStartedAt)
+    }
 	},
 }
 </script>
