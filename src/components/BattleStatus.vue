@@ -1,37 +1,39 @@
 <template>
 	<v-card class="d-flex rounded-0 app-bar align-center">
-		<div class="w100">
-			<v-select
-				v-model="countDicesDefault"
-				:items="countDices"
-				variant="underlined"
-				hide-details
-				base-color="#9d0a0e"
+		<div class="d-none d-md-flex">
+			<div class="w100">
+				<v-select
+					v-model="countDicesDefault"
+					:items="countDices"
+					variant="underlined"
+					hide-details
+					base-color="#9d0a0e"
+					class="ma-2"
+					density="compact"
+				></v-select>
+			</div>
+			<div class="w100">
+				<v-select
+					v-model="diceDefault"
+					:items="dices"
+					variant="underlined"
+					hide-details
+					base-color="#9d0a0e"
+					class="ma-2"
+					density="compact"
+				></v-select>
+			</div>
+			<v-btn
+				color="#9d0a0e"
+				variant="text"
 				class="ma-2"
-				density="compact"
-			></v-select>
+				size="large"
+				prepend-icon="mdi-dice-5-outline"
+				@click="getDice(countDicesDefault, diceDefault)"
+			>
+				= {{ printDiceResult }}</v-btn
+			>
 		</div>
-		<div class="w100">
-			<v-select
-				v-model="diceDefault"
-				:items="dices"
-				variant="underlined"
-				hide-details
-				base-color="#9d0a0e"
-				class="ma-2"
-				density="compact"
-			></v-select>
-		</div>
-		<v-btn
-			color="#9d0a0e"
-			variant="text"
-			class="ma-2"
-			size="large"
-			prepend-icon="mdi-dice-5-outline"
-			@click="getDice(countDicesDefault, diceDefault)"
-		>
-			= {{ printDiceResult }}</v-btn
-		>
 		<v-spacer></v-spacer>
 		<div v-if="!isStarted">
 			<v-btn
@@ -107,6 +109,7 @@ export default {
 				{ title: 'd8', value: 8 },
 				{ title: 'd10', value: 10 },
 				{ title: 'd20', value: 20 },
+				{ title: 'd100', value: 100 },
 			],
 			countDices: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 			dicesMultipleResult: [],
@@ -130,6 +133,7 @@ export default {
 				for (let i = 0; i < countDices; i++) {
 					arr.push(shared.dice(1, dice))
 				}
+				this.dicesMultipleResult = arr
 				return arr
 			}
 		},
@@ -138,10 +142,8 @@ export default {
 		printDiceResult() {
 			if (this.countDicesDefault === 1) return this.dicesResult
 			else {
-				let result = this.getDice(this.countDicesDefault, this.diceDefault)
-				this.dicesMultipleResult = result
 				return (
-					result.join(' + ') +
+					this.dicesMultipleResult.join(' + ') +
 					' = ' +
 					this.dicesMultipleResult.reduce((a, v) => {
 						return a + v

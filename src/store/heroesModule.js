@@ -1,7 +1,7 @@
 export const heroesModule = {
 	state: () => ({
-		heroes: [],
-		heroesTest: [
+		heroesTest: [],
+		heroes: [
 			{
 				id: 0,
 				name: 'Lev',
@@ -10,12 +10,6 @@ export const heroesModule = {
 				ac: 13,
 				currentHp: 22,
 				status: [
-					{
-						name: 'Умер',
-						color: 'black',
-						active: false,
-						time: 0,
-					},
 					{
 						name: 'Бессознательный',
 						color: 'red',
@@ -99,11 +93,6 @@ export const heroesModule = {
 				currentHp: 20,
 				status: [
 					{
-						name: 'Умер',
-						color: 'black',
-						active: false,
-					},
-					{
 						name: 'Бессознательный',
 						color: 'red',
 						active: false,
@@ -173,11 +162,6 @@ export const heroesModule = {
 				ac: 18,
 				currentHp: 16,
 				status: [
-					{
-						name: 'Умер',
-						color: 'black',
-						active: false,
-					},
 					{
 						name: 'Бессознательный',
 						color: 'red',
@@ -249,11 +233,6 @@ export const heroesModule = {
 				currentHp: 18,
 				status: [
 					{
-						name: 'Умер',
-						color: 'black',
-						active: false,
-					},
-					{
 						name: 'Бессознательный',
 						color: 'red',
 						active: false,
@@ -323,11 +302,6 @@ export const heroesModule = {
 				ac: 16,
 				currentHp: 18,
 				status: [
-					{
-						name: 'Умер',
-						color: 'black',
-						active: false,
-					},
 					{
 						name: 'Бессознательный',
 						color: 'red',
