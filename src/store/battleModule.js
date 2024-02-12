@@ -84,19 +84,21 @@ export const battleModule = {
 					min: 0,
 					sec: 0,
 				})
-			} else {
-				if (getters.getTime.sec === 54) {
-					commit('setTime', {
-						min: getters.getTime.min + 1,
-						sec: 0,
-					})
-				} else {
-					commit('setTime', {
-						min: getters.getTime.min,
-						sec: (getters.getTime.sec += 6),
-					})
-				}
+				return
 			}
+
+			if (getters.getTime.sec === 54) {
+				commit('setTime', {
+					min: getters.getTime.min + 1,
+					sec: 0,
+				})
+				return
+			}
+
+			commit('setTime', {
+				min: getters.getTime.min,
+				sec: (getters.getTime.sec += 6),
+			})
 		},
 		endBattle({ commit }) {
 			commit('setStart', false)

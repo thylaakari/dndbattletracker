@@ -1,6 +1,6 @@
 <template>
 	<v-card class="d-flex rounded-0 app-bar align-center">
-		<div class="d-none d-md-flex">
+		<div class="d-none d-lg-flex">
 			<div class="w100">
 				<v-select
 					v-model="countDicesDefault"
@@ -31,8 +31,8 @@
 				prepend-icon="mdi-dice-5-outline"
 				@click="getDice(countDicesDefault, diceDefault)"
 			>
-				= {{ printDiceResult }}</v-btn
-			>
+				= {{ diceResultToShow }}
+			</v-btn>
 		</div>
 		<v-spacer></v-spacer>
 		<div v-if="!isStarted">
@@ -42,19 +42,19 @@
 				color="#9d0a0e"
 				variant="outlined"
 				class="ma-2"
-				>Начать бой</v-btn
-			>
+				>Начать бой
+			</v-btn>
 		</div>
 		<div v-else class="d-flex flex-wrap">
 			<v-chip class="ma-2">Ход: {{ turnHeroName }}</v-chip>
 			<v-chip class="ma-2"
-				>Раунд: {{ round }} / Ход: {{ turn }} из {{ countTurnInRound }}</v-chip
-			>
+				>Раунд: {{ round }} / Ход: {{ turn }} из {{ countTurnInRound }}
+			</v-chip>
 			<v-chip class="ma-2"
 				>Времени прошло: {{ min < 10 ? '0' + min : min }}:{{
 					sec < 10 ? '0' + sec : sec
-				}}</v-chip
-			>
+				}}
+			</v-chip>
 			<v-btn
 				prepend-icon="mdi-arrow-right"
 				@click="nextTurn()"
@@ -62,8 +62,8 @@
 				color="#9d0a0e"
 				variant="outlined"
 				class="ma-2"
-				>Следующий раунд</v-btn
-			>
+				>Следующий раунд
+			</v-btn>
 			<v-btn
 				prepend-icon="mdi-arrow-right"
 				@click="nextTurn()"
@@ -71,17 +71,17 @@
 				color="#9d0a0e"
 				variant="outlined"
 				class="ma-2"
-				>Следующий ход</v-btn
-			>
+				>Следующий ход
+			</v-btn>
 			<v-btn prepend-icon="mdi-close" color="#9d0a0e" class="ma-2">
 				Закончить бой
 				<v-dialog v-model="dialog" activator="parent" width="auto">
 					<v-card>
-						<v-card-title> Закончить бой? </v-card-title>
+						<v-card-title> Закончить бой?</v-card-title>
 						<v-card-actions class="d-flex justify-space-between">
 							<v-btn color="#9d0a0e" @click="dialog = false" variant="flat"
-								>Нет</v-btn
-							>
+								>Нет
+							</v-btn>
 							<v-btn color="#9d0a0e" @click="endBattleAndDialog()">Да</v-btn>
 						</v-card-actions>
 					</v-card>
@@ -93,6 +93,7 @@
 <script>
 import shared from '@/components/shared'
 import { mapActions, mapState } from 'vuex'
+
 export default {
 	name: 'BattleStatus',
 	data() {
@@ -101,6 +102,7 @@ export default {
 			diceDefault: 20,
 			countDicesDefault: 1,
 			dicesResult: 0,
+			diceResultToShow: '',
 			dices: [
 				{ title: 'd2', value: 2 },
 				{ title: 'd3', value: 3 },
@@ -111,7 +113,7 @@ export default {
 				{ title: 'd20', value: 20 },
 				{ title: 'd100', value: 100 },
 			],
-			countDices: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+			countDices: [1, 2, 3, 4, 5],
 			dicesMultipleResult: [],
 		}
 	},
@@ -126,31 +128,23 @@ export default {
 			this.dialog = false
 		},
 		getDice(countDices, dice) {
-			if (countDices === 1) {
-				this.dicesResult = shared.dice(countDices, dice)
-			} else {
-				let arr = []
-				for (let i = 0; i < countDices; i++) {
-					arr.push(shared.dice(1, dice))
-				}
-				this.dicesMultipleResult = arr
-				return arr
+			const dices = Array(countDices)
+				.fill(0)
+				.map(() => shared.dice(1, dice))
+			this.dicesMultipleResult = dices
+			if (this.countDicesDefault === 1) {
+				this.diceResultToShow = dices[0]
+				return
 			}
+
+			this.diceResultToShow = `${dices.join(
+				' + '
+			)} = ${this.dicesMultipleResult.reduce((a, v) => {
+				return a + v
+			}, 0)}`
 		},
 	},
 	computed: {
-		printDiceResult() {
-			if (this.countDicesDefault === 1) return this.dicesResult
-			else {
-				return (
-					this.dicesMultipleResult.join(' + ') +
-					' = ' +
-					this.dicesMultipleResult.reduce((a, v) => {
-						return a + v
-					}, 0)
-				)
-			}
-		},
 		...mapState({
 			isStarted: state => state.battle.start,
 			round: state => state.battle.round,
@@ -171,6 +165,7 @@ export default {
 	background-color: #e7e7db;
 	border-bottom: 4px solid #9d0a0e;
 }
+
 .w100 {
 	width: 100px;
 }

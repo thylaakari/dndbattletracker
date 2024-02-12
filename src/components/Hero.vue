@@ -7,22 +7,22 @@
 				prepend-icon="mdi-heart-outline"
 				variant="outlined"
 				color="pink"
-				>{{ hero.currentHp }} / {{ hero.hp }}</v-chip
-			>
+				>{{ hero.currentHp }} / {{ hero.hp }}
+			</v-chip>
 			<v-chip
 				class="ma-1"
 				prepend-icon="mdi-dice-multiple-outline"
 				variant="outlined"
 				color="blue"
-				>{{ hero.initiative }}</v-chip
-			>
+				>{{ hero.initiative }}
+			</v-chip>
 			<v-chip
 				class="ma-1"
 				prepend-icon="mdi-shield-outline"
 				variant="outlined"
 				color="deep-orange"
-				>{{ hero.ac }}</v-chip
-			>
+				>{{ hero.ac }}
+			</v-chip>
 		</v-card-title>
 		<div v-if="isStarted === true">
 			<v-divider class="mx-4 mb-1"></v-divider>
@@ -55,6 +55,7 @@
 <script>
 import StatusList from '@/components/StatusList'
 import { mapActions, mapMutations, mapState } from 'vuex'
+
 export default {
 	name: 'Hero',
 	components: {
@@ -82,7 +83,14 @@ export default {
 			setExactStatus: 'heroes/setExactStatus',
 		}),
 		changeStatus(name, active) {
-			this.setStatus({ id: this.hero.id, name: name, active: active })
+			this.setStatus({
+				id: this.hero.id,
+				name,
+				active,
+				effectStartedAt: !active
+					? 60 * +this.timeElapsed.min + +this.timeElapsed.sec
+					: 0,
+			})
 		},
 		changeExactStatus(name, active) {
 			this.setExactStatus({ id: this.hero.id, name: name, active: active })
@@ -99,13 +107,14 @@ export default {
 					this.isDead = false
 				}
 				this.newHp = ''
-			} else return
+			}
 		},
 	},
 	computed: {
 		...mapState({
 			heroID: state => state.battle.turnHeroID,
 			isStarted: state => state.battle.start,
+			timeElapsed: state => state.battle.timeElapsed,
 		}),
 		class() {
 			if (this.heroID === this.hero.id) return 'hero-card-active'
@@ -123,10 +132,12 @@ export default {
 	border: 1px solid #9d0a0e;
 	background-color: #ebe1ad;
 }
+
 .hero-card {
 	border: 1px solid grey;
 	background-color: #e7e7db;
 }
+
 .hero-card-dead {
 	border: 1px solid #9d0a0e;
 	background-color: #e0e0e0;

@@ -2,7 +2,14 @@
 	<v-container fluid>
 		<v-row>
 			<transition-group name="flip-list">
-				<v-col cols="12" md="3" v-for="hero in heroes" :key="hero.id">
+				<v-col
+					cols="12"
+					lg="3"
+					md="4"
+					sm="6"
+					v-for="hero in heroes"
+					:key="hero.id"
+				>
 					<hero :hero="hero"></hero>
 				</v-col>
 			</transition-group>

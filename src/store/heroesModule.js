@@ -1,3 +1,86 @@
+const defaultStatuses = [
+	{
+		name: 'Бессознательный',
+		color: 'red',
+		active: false,
+		time: 0,
+		effectStartedAt: 0,
+	},
+	{
+		name: 'Испуганный',
+		color: 'purple',
+		active: false,
+		time: 0,
+		effectStartedAt: 0,
+	},
+	{
+		name: 'Истощенный',
+		color: 'deep-purple',
+		active: false,
+		time: 0,
+		effectStartedAt: 0,
+	},
+	{
+		name: 'Окаменевший',
+		color: 'pink',
+		active: false,
+		time: 0,
+		effectStartedAt: 0,
+	},
+	{
+		name: 'Опутанный',
+		color: 'indigo',
+		active: false,
+		time: 0,
+		effectStartedAt: 0,
+	},
+	{
+		name: 'Ослепленный',
+		color: 'blue',
+		active: false,
+		time: 0,
+		effectStartedAt: 0,
+	},
+	{
+		name: 'Отравленный',
+		color: 'light-blue',
+		active: false,
+		time: 0,
+		effectStartedAt: 0,
+	},
+	{
+		name: 'Очарованный',
+		color: 'cyan',
+		active: false,
+		time: 0,
+		effectStartedAt: 0,
+	},
+	{
+		name: 'Ошеломленный',
+		color: 'teal',
+		active: false,
+		time: 0,
+		effectStartedAt: 0,
+	},
+	{
+		name: 'Парализованный',
+		color: 'green',
+		active: false,
+		time: 0,
+	},
+	{
+		name: 'Сбитый с ног',
+		color: 'light-green',
+		active: false,
+		time: 0,
+	},
+	{
+		name: 'Схваченный',
+		color: 'lime',
+		active: false,
+		time: 0,
+	},
+]
 export const heroesModule = {
 	state: () => ({
 		heroes: [],
@@ -9,80 +92,7 @@ export const heroesModule = {
 				hp: 22,
 				ac: 13,
 				currentHp: 22,
-				status: [
-					{
-						name: 'Бессознательный',
-						color: 'red',
-						active: false,
-						time: 0,
-					},
-					{
-						name: 'Испуганный',
-						color: 'purple',
-						active: false,
-						time: 0,
-					},
-					{
-						name: 'Истощенный',
-						color: 'deep-purple',
-						active: false,
-						time: 0,
-					},
-					{
-						name: 'Окаменевший',
-						color: 'pink',
-						active: false,
-						time: 0,
-					},
-					{
-						name: 'Опутанный',
-						color: 'indigo',
-						active: false,
-						time: 0,
-					},
-					{
-						name: 'Ослепленный',
-						color: 'blue',
-						active: false,
-						time: 0,
-					},
-					{
-						name: 'Отравленный',
-						color: 'light-blue',
-						active: false,
-						time: 0,
-					},
-					{
-						name: 'Очарованный',
-						color: 'cyan',
-						active: false,
-						time: 0,
-					},
-					{
-						name: 'Ошеломленный',
-						color: 'teal',
-						active: false,
-						time: 0,
-					},
-					{
-						name: 'Парализованный',
-						color: 'green',
-						active: false,
-						time: 0,
-					},
-					{
-						name: 'Сбитый с ног',
-						color: 'light-green',
-						active: false,
-						time: 0,
-					},
-					{
-						name: 'Схваченный',
-						color: 'lime',
-						active: false,
-						time: 0,
-					},
-				],
+				status: [...defaultStatuses.map(s => ({ ...s }))],
 			},
 			{
 				id: 1,
@@ -91,68 +101,7 @@ export const heroesModule = {
 				hp: 20,
 				ac: 12,
 				currentHp: 20,
-				status: [
-					{
-						name: 'Бессознательный',
-						color: 'red',
-						active: false,
-					},
-					{
-						name: 'Испуганный',
-						color: 'purple',
-						active: false,
-					},
-					{
-						name: 'Истощенный',
-						color: 'deep-purple',
-						active: false,
-					},
-					{
-						name: 'Окаменевший',
-						color: 'pink',
-						active: false,
-					},
-					{
-						name: 'Опутанный',
-						color: 'indigo',
-						active: false,
-					},
-					{
-						name: 'Ослепленный',
-						color: 'blue',
-						active: false,
-					},
-					{
-						name: 'Отравленный',
-						color: 'light-blue',
-						active: false,
-					},
-					{
-						name: 'Очарованный',
-						color: 'cyan',
-						active: false,
-					},
-					{
-						name: 'Ошеломленный',
-						color: 'teal',
-						active: false,
-					},
-					{
-						name: 'Парализованный',
-						color: 'green',
-						active: false,
-					},
-					{
-						name: 'Сбитый с ног',
-						color: 'light-green',
-						active: false,
-					},
-					{
-						name: 'Схваченный',
-						color: 'lime',
-						active: false,
-					},
-				],
+				status: [...defaultStatuses.map(s => ({ ...s }))],
 			},
 			{
 				id: 2,
@@ -161,68 +110,7 @@ export const heroesModule = {
 				hp: 16,
 				ac: 18,
 				currentHp: 16,
-				status: [
-					{
-						name: 'Бессознательный',
-						color: 'red',
-						active: false,
-					},
-					{
-						name: 'Испуганный',
-						color: 'purple',
-						active: false,
-					},
-					{
-						name: 'Истощенный',
-						color: 'deep-purple',
-						active: false,
-					},
-					{
-						name: 'Окаменевший',
-						color: 'pink',
-						active: false,
-					},
-					{
-						name: 'Опутанный',
-						color: 'indigo',
-						active: false,
-					},
-					{
-						name: 'Ослепленный',
-						color: 'blue',
-						active: false,
-					},
-					{
-						name: 'Отравленный',
-						color: 'light-blue',
-						active: false,
-					},
-					{
-						name: 'Очарованный',
-						color: 'cyan',
-						active: false,
-					},
-					{
-						name: 'Ошеломленный',
-						color: 'teal',
-						active: false,
-					},
-					{
-						name: 'Парализованный',
-						color: 'green',
-						active: false,
-					},
-					{
-						name: 'Сбитый с ног',
-						color: 'light-green',
-						active: false,
-					},
-					{
-						name: 'Схваченный',
-						color: 'lime',
-						active: false,
-					},
-				],
+				status: [...defaultStatuses.map(s => ({ ...s }))],
 			},
 			{
 				id: 3,
@@ -231,68 +119,7 @@ export const heroesModule = {
 				hp: 18,
 				ac: 16,
 				currentHp: 18,
-				status: [
-					{
-						name: 'Бессознательный',
-						color: 'red',
-						active: false,
-					},
-					{
-						name: 'Испуганный',
-						color: 'purple',
-						active: false,
-					},
-					{
-						name: 'Истощенный',
-						color: 'deep-purple',
-						active: false,
-					},
-					{
-						name: 'Окаменевший',
-						color: 'pink',
-						active: false,
-					},
-					{
-						name: 'Опутанный',
-						color: 'indigo',
-						active: false,
-					},
-					{
-						name: 'Ослепленный',
-						color: 'blue',
-						active: false,
-					},
-					{
-						name: 'Отравленный',
-						color: 'light-blue',
-						active: false,
-					},
-					{
-						name: 'Очарованный',
-						color: 'cyan',
-						active: false,
-					},
-					{
-						name: 'Ошеломленный',
-						color: 'teal',
-						active: false,
-					},
-					{
-						name: 'Парализованный',
-						color: 'green',
-						active: false,
-					},
-					{
-						name: 'Сбитый с ног',
-						color: 'light-green',
-						active: false,
-					},
-					{
-						name: 'Схваченный',
-						color: 'lime',
-						active: false,
-					},
-				],
+				status: [...defaultStatuses.map(s => ({ ...s }))],
 			},
 			{
 				id: 4,
@@ -301,68 +128,7 @@ export const heroesModule = {
 				hp: 18,
 				ac: 16,
 				currentHp: 18,
-				status: [
-					{
-						name: 'Бессознательный',
-						color: 'red',
-						active: false,
-					},
-					{
-						name: 'Испуганный',
-						color: 'purple',
-						active: false,
-					},
-					{
-						name: 'Истощенный',
-						color: 'deep-purple',
-						active: false,
-					},
-					{
-						name: 'Окаменевший',
-						color: 'pink',
-						active: false,
-					},
-					{
-						name: 'Опутанный',
-						color: 'indigo',
-						active: false,
-					},
-					{
-						name: 'Ослепленный',
-						color: 'blue',
-						active: false,
-					},
-					{
-						name: 'Отравленный',
-						color: 'light-blue',
-						active: false,
-					},
-					{
-						name: 'Очарованный',
-						color: 'cyan',
-						active: false,
-					},
-					{
-						name: 'Ошеломленный',
-						color: 'teal',
-						active: false,
-					},
-					{
-						name: 'Парализованный',
-						color: 'green',
-						active: false,
-					},
-					{
-						name: 'Сбитый с ног',
-						color: 'light-green',
-						active: false,
-					},
-					{
-						name: 'Схваченный',
-						color: 'lime',
-						active: false,
-					},
-				],
+				status: [...defaultStatuses.map(s => ({ ...s }))],
 			},
 		],
 	}),
@@ -385,17 +151,15 @@ export const heroesModule = {
 		getHeroesID(state, getters) {
 			return getters.sortedByInitiative.map(h => h.id)
 		},
-		getStatusHeroByActive: (state, getters) => (id, bool) => {
-			let hero = getters.getHeroByID(id)
-			return hero.status.filter(s => s.active === bool)
-		},
+		getStatusHeroByActive: (_, getters) => (heroId, isActive) =>
+			getters.getHeroByID(heroId)?.status.filter(s => s.active === isActive),
 	},
 	mutations: {
 		saveHero(state, hero) {
 			state.heroes.push(hero)
 		},
 		setHpByID(state, data) {
-			let hero = state.heroes.find(h => h.id === data.id)
+			const hero = state.heroes.find(h => h.id === data.id)
 			data.sign === '+'
 				? (hero.currentHp += data.newHp)
 				: (hero.currentHp -= data.newHp)
@@ -405,9 +169,11 @@ export const heroesModule = {
 			hero.currentHp = data.hp
 		},
 		setStatus(state, status) {
-			let hero = state.heroes.find(h => h.id === status.id)
-			hero.status.find(s => s.name === status.name).active = !status.active
-			hero.status.find(s => s.name === status.name).time = '00:00'
+			const hero = state.heroes.find(h => h.id === status.id)
+			const oldStatus = hero.status.find(s => s.name === status.name)
+			oldStatus.active = !status.active
+			oldStatus.time = status.time
+			oldStatus.effectStartedAt = status.effectStartedAt
 		},
 		setExactStatus(state, status) {
 			let hero = state.heroes.find(h => h.id === status.id)
