@@ -92,11 +92,6 @@ export default {
 				this.hero.currentHp = this.hero.hp
 				this.hero.status = [
 					{
-						name: 'Умер',
-						color: 'black',
-						active: false,
-					},
-					{
 						name: 'Бессознательный',
 						color: 'red',
 						active: false,
