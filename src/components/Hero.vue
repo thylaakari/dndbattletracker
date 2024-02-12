@@ -41,6 +41,7 @@
 				@changeStatus="changeStatus"
 				:hero="hero"
 				:active="true"
+				:dead="isDead"
 			></status-list>
 			<v-divider class="mx-4 mb-1"></v-divider>
 			<status-list
@@ -68,6 +69,7 @@ export default {
 	data() {
 		return {
 			newHp: '',
+			isDead: false,
 		}
 	},
 	methods: {
@@ -91,10 +93,10 @@ export default {
 				this.newHp === '' ? (hp = 1) : (hp = +this.newHp)
 				this.changeHp({ sign: sign, newHp: hp, id: this.hero.id })
 				if (this.hero.currentHp < 1) {
-					this.changeExactStatus('Умер', true)
+					this.isDead = true
 					this.setHp({ id: this.hero.id, hp: 0 })
 				} else {
-					this.changeExactStatus('Умер', false)
+					this.isDead = false
 				}
 				this.newHp = ''
 			} else return

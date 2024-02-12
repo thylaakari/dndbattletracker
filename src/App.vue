@@ -4,6 +4,7 @@
 		<v-main class="main">
 			<add-hero></add-hero>
 			<hero-list></hero-list>
+			<dice-xs></dice-xs>
 		</v-main>
 		<v-footer border class="bg-grey-lighten-5 d-flex flex-wrap" app>
 			<v-btn variant="plain" disabled>{{ new Date().getFullYear() }}</v-btn>
@@ -21,6 +22,7 @@
 <script>
 import AddHero from '@/components/AddHero'
 import BattleStatus from '@/components/BattleStatus'
+import DiceXs from '@/components/DiceXs'
 import HeroList from '@/components/HeroList'
 export default {
 	name: 'App',
@@ -28,6 +30,7 @@ export default {
 		BattleStatus,
 		AddHero,
 		HeroList,
+		DiceXs,
 	},
 }
 </script>
