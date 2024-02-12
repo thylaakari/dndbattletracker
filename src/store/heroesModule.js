@@ -1,7 +1,7 @@
 export const heroesModule = {
 	state: () => ({
-		heroesTest: [],
-		heroes: [
+		heroes: [],
+		heroesTest: [
 			{
 				id: 0,
 				name: 'Lev',
