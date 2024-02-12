@@ -8,7 +8,7 @@
 					class="ma-1"
 					size="x-small"
 					color="black"
-					v-if="f1 && f2 && f3 === true"
+					v-if="f1 && f2 && f3"
 					>Умер
 				</v-btn>
 				<v-btn
@@ -16,7 +16,7 @@
 					class="ma-1"
 					size="x-small"
 					color="light-green"
-					v-else-if="s1 && s2 && s3 === true"
+					v-else-if="s1 && s2 && s3"
 					>Стабилизирован
 				</v-btn>
 				<v-btn rounded="xl" class="ma-1" size="x-small" color="cyan" v-else
