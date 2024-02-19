@@ -32,6 +32,9 @@ export default {
 		HeroList,
 		DiceXs,
 	},
+	mounted() {
+		this.$metrika.hit('https://dndbattle.netlify.app/')
+	},
 }
 </script>
 
