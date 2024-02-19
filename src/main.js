@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import vueYandexMetrika from 'vue-yandex-metrika'
 import App from './App.vue'
 import './registerServiceWorker'
 import store from './store'
@@ -23,4 +24,14 @@ const vuetify = createVuetify({
 	},
 })
 
-createApp(App).use(vuetify).use(store).mount('#app')
+// Metrika
+const metrika = {
+	id: 96513636,
+	env: process.env.NODE_ENV,
+}
+
+createApp(App)
+	.use(vuetify)
+	.use(vueYandexMetrika, metrika)
+	.use(store)
+	.mount('#app')
